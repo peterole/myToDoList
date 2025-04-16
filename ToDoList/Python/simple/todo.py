@@ -38,7 +38,7 @@ def add_tasks(task_id):
 
     # task created at
 
-    created_at = datetime.now()
+    created_at = datetime.datetime.now()
 
     # task updated at
 
@@ -46,13 +46,15 @@ def add_tasks(task_id):
 
     # task populating
 
-    task_list = [("ID: " + task_id), ("Decrription: " + task_description), 
-            ("Status: " + task_status), ("Created At: " + created_at), 
-            ("Updated At" + updated_at)]
+    task_list = [("ID: " + str(task_id)), ("Description: " + task_description), 
+            ("Status: " + status), ("Created At: " + str(created_at)), 
+            ("Updated At" + str(updated_at))]
 
     file = open(TASK_FILE, "a")
+    i = 0
     for task in task_list:
-        file.write(task_list[task])
+        file.write(task_list[i])
+        i += 1
     file.write("\n")
     file.close()
 
@@ -66,7 +68,7 @@ def update_task():
 def remove_task():
     pass
 
-# Edit status of a task
+# List tasks
 
 def list_tasks_all():
     pass
@@ -75,9 +77,6 @@ def list_completed_tasks():
     pass
 
 def list_incomplete_tasks():
-    pass
-
-def exit_program():
     pass
 
 program_menu = ["1: Add Task", "2: Update Task", "3: Delete Task", 
@@ -91,7 +90,7 @@ for item in range(len(program_menu)):
 menu_input = int(input("Menu Selection: "))
 
 if menu_input == 1:
-    add_tasks()
+    add_tasks(task_id)
 
 elif menu_input == 2:
     update_task()
@@ -108,5 +107,7 @@ elif menu_input == 5:
 elif menu_input == 6:
     list_incomplete_tasks()
 
-elif
+elif menu_input == 7:
+    exit
+
 # End
