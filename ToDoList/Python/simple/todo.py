@@ -2,7 +2,7 @@ import datetime
 import json
 import os
 
-TASK_FILE = "tasks.json"
+TASK_FILE = "tasks.txt"
 
 if os.path.exists(TASK_FILE):
     print("File does exist!")
@@ -13,7 +13,7 @@ else:
     file.close()
 
 # Add a task
-task_id = 0
+
 
 def add_tasks(task_id):
 
@@ -48,15 +48,17 @@ def add_tasks(task_id):
 
     task_list = [("ID: " + str(task_id)), ("Description: " + task_description), 
             ("Status: " + status), ("Created At: " + str(created_at)), 
-            ("Updated At" + str(updated_at))]
+            ("Updated At: " + str(updated_at))]
 
     file = open(TASK_FILE, "a")
     i = 0
     for task in task_list:
-        file.write(task_list[i])
+        file.write(task_list[i] + "\n")
         i += 1
-    file.write("\n")
+    file.writelines("\n")
     file.close()
+
+    main()
 
 # View a task
 
@@ -79,35 +81,41 @@ def list_completed_tasks():
 def list_incomplete_tasks():
     pass
 
-program_menu = ["1: Add Task", "2: Update Task", "3: Delete Task", 
-                "4: List All Tasks", "5: List All Completed Tasks",
-                "6: List All Non-Completed Tasks", "7: Exit Program"]
+def main():
 
-for item in range(len(program_menu)):
-    print(program_menu[item])
-    item +=1
+    program_menu = ["1: Add Task", "2: Update Task", "3: Delete Task", 
+                    "4: List All Tasks", "5: List All Completed Tasks",
+                    "6: List All Non-Completed Tasks", "7: Exit Program"]
 
-menu_input = int(input("Menu Selection: "))
+    for item in range(len(program_menu)):
+        print(program_menu[item])
+        item +=1
 
-if menu_input == 1:
-    add_tasks(task_id)
+    menu_input = int(input("Menu Selection: "))
 
-elif menu_input == 2:
-    update_task()
+    task_id = 0
 
-elif menu_input == 3:
-    remove_task()
+    if menu_input == 1:
+        add_tasks(task_id)
 
-elif menu_input == 4:
-    list_tasks_all()
+    elif menu_input == 2:
+        update_task()
 
-elif menu_input == 5:
-    list_completed_tasks()
+    elif menu_input == 3:
+        remove_task()
 
-elif menu_input == 6:
-    list_incomplete_tasks()
+    elif menu_input == 4:
+        list_tasks_all()
 
-elif menu_input == 7:
-    exit
+    elif menu_input == 5:
+        list_completed_tasks()
 
+    elif menu_input == 6:
+        list_incomplete_tasks()
+
+    elif menu_input == 7:
+        exit
+
+
+main()
 # End
